@@ -9,31 +9,30 @@
 </head>
 
 <body>
-  <header class="app-header">
+  <header class="site-header">
     <div class="header-container">
-      <div class="logo-area">
-        <span class="logo-text">WT</span>
-        <h1 class="app-title">Трекер тренувань</h1>
-      </div>
-      <nav class="app-nav" aria-label="Головне меню">
+      <h1 class="site-title">Трекер тренувань</h1>
+
+      <nav class="site-nav" aria-label="Головне меню">
         <ul class="nav-list">
-          <li class="nav-item"><a href="#/" class="nav-link active" data-nav="workouts">Журнал</a></li>
-          <li class="nav-item"><a href="#/stats" class="nav-link" data-nav="stats">Статистика</a></li>
+          <li class="nav-item"><a class="nav-link active" href="#add-workout">Додати</a></li>
+          <li class="nav-item"><a class="nav-link" href="#quick-stats">Статистика</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <main class="app-main" id="app-viewport">
+  <main class="site-main">
     <div class="content-container">
-      <section class="workout-form-section" id="add-workout" aria-labelledby="form-heading">
+      <section id="add-workout" aria-labelledby="form-heading">
         <div class="section-card">
           <h2 class="section-title" id="form-heading">Додати тренування</h2>
-          <form class="workout-form" id="workout-form" data-form="new-workout" novalidate>
+
+          <form class="workout-form">
             <div class="form-group">
-              <label for="workout-type" class="form-label">Тип тренування</label>
-              <select id="workout-type" name="type" class="form-select" data-field="type" required>
-                <option value="" disabled selected>Оберіть активність...</option>
+              <label class="form-label" for="workout-type">Тип тренування</label>
+              <select class="form-select" id="workout-type" name="type" required>
+                <option value="" selected disabled>Оберіть активність</option>
                 <option value="Біг">Біг</option>
                 <option value="Силове тренування">Силове тренування</option>
                 <option value="Велосипед">Велосипед</option>
@@ -44,134 +43,106 @@
 
             <div class="form-row">
               <div class="form-group">
-                <label for="workout-minutes" class="form-label">Тривалість (хв)</label>
-                <input type="number" id="workout-minutes" name="minutes" class="form-input" data-field="minutes" min="1"
-                  inputmode="numeric" placeholder="напр. 45" required>
+                <label class="form-label" for="workout-minutes">Тривалість (хв)</label>
+                <input class="form-input" id="workout-minutes" name="minutes" type="number" min="1"
+                  placeholder="Наприклад, 45" required>
               </div>
 
               <div class="form-group">
-                <label for="workout-calories" class="form-label">Спалені калорії (ккал)</label>
-                <input type="number" id="workout-calories" name="calories" class="form-input" data-field="calories"
-                  min="1" max="2000" inputmode="numeric" placeholder="напр. 380" required>
+                <label class="form-label" for="workout-calories">Калорії (ккал)</label>
+                <input class="form-input" id="workout-calories" name="calories" type="number" min="1" max="2000"
+                  placeholder="Наприклад, 380" required>
               </div>
             </div>
 
             <div class="form-group">
-              <label for="workout-date" class="form-label">Дата тренування</label>
-              <input type="date" id="workout-date" name="date" class="form-input" data-field="date" required>
+              <label class="form-label" for="workout-date">Дата тренування</label>
+              <input class="form-input" id="workout-date" name="date" type="date" required>
             </div>
 
-            <div class="pace-preview" id="pace-preview" data-role="pace-indicator" aria-live="polite">
-              <span class="pace-label">Очікуваний темп:</span>
-              <strong class="pace-value" data-output="pace-val">— ккал/хв</strong>
-            </div>
-
-            <button type="submit" class="btn btn-primary" data-action="submit-workout">
-              <span class="btn-text">Зберегти тренування</span>
-            </button>
+            <button class="btn btn-primary" type="submit">Зберегти тренування</button>
           </form>
         </div>
       </section>
 
-      <section class="workouts-history-section" id="workouts-history" aria-labelledby="history-heading">
-        <div class="history-header">
-          <h2 class="section-title" id="history-heading">Історія тренувань</h2>
-          <button type="button" class="btn btn-secondary btn-sm" data-action="refresh-plan">
-            <span>Оновити план (API)</span>
-          </button>
-        </div>
+      <section id="workouts-history" aria-labelledby="history-heading">
+        <h2 class="section-title" id="history-heading">Історія тренувань</h2>
 
-        <div class="workouts-grid" id="workouts-list" data-container="workouts-list">
-          <article class="workout-card short" data-workout-id="demo-1" data-calories="240">
+        <div class="workouts-grid">
+          <article class="workout-card short">
             <div class="card-header">
-              <span class="workout-badge" data-badge="type">Біг</span>
+              <span class="workout-badge">
+                <span class="workout-icon" aria-hidden="true">Б</span>
+                Біг
+              </span>
               <time class="workout-date" datetime="2026-09-22">22.09.2026</time>
             </div>
-            <div class="card-body">
-              <h3 class="workout-title">Ранкова пробіжка</h3>
-              <div class="workout-metrics">
-                <span class="metric-item"><strong>25</strong> хв</span>
-                <span class="metric-divider">•</span>
-                <span class="metric-item"><strong>240</strong> ккал</span>
-                <span class="metric-divider">•</span>
-                <span class="metric-item text-highlight"><strong>10</strong> ккал/хв</span>
-              </div>
-            </div>
-            <div class="card-footer">
-              <a href="#/workouts/demo-1" class="btn btn-outline btn-sm" data-action="view-details"
-                data-target-id="demo-1">Деталі</a>
-              <button type="button" class="btn btn-danger btn-sm" data-action="delete-workout" data-target-id="demo-1"
-                aria-label="Видалити тренування">Видалити</button>
-            </div>
+            <h3 class="workout-title">Ранкова пробіжка</h3>
+            <p class="workout-metrics">
+              <span><strong>25</strong> хв</span>
+              <span class="metric-divider">·</span>
+              <span><strong>240</strong> ккал</span>
+            </p>
           </article>
 
-          <article class="workout-card long" data-workout-id="demo-2" data-calories="550">
+          <article class="workout-card long">
             <div class="card-header">
-              <span class="workout-badge" data-badge="type">Силове</span>
+              <span class="workout-badge">
+                <span class="workout-icon" aria-hidden="true">С</span>
+                Силове тренування
+              </span>
               <time class="workout-date" datetime="2026-09-20">20.09.2026</time>
             </div>
-            <div class="card-body">
-              <h3 class="workout-title">День ніг і кор</h3>
-              <div class="workout-metrics">
-                <span class="metric-item"><strong>50</strong> хв</span>
-                <span class="metric-divider">•</span>
-                <span class="metric-item"><strong>550</strong> ккал</span>
-                <span class="metric-divider">•</span>
-                <span class="metric-item text-highlight"><strong>11</strong> ккал/хв</span>
-              </div>
+            <h3 class="workout-title">День ніг і кор</h3>
+            <p class="workout-metrics">
+              <span><strong>50</strong> хв</span>
+              <span class="metric-divider">·</span>
+              <span><strong>550</strong> ккал</span>
+            </p>
+          </article>
+
+          <article class="workout-card long">
+            <div class="card-header">
+              <span class="workout-badge">
+                <span class="workout-icon" aria-hidden="true">В</span>
+                Велосипед
+              </span>
+              <time class="workout-date" datetime="2026-09-18">18.09.2026</time>
             </div>
-            <div class="card-footer">
-              <a href="#/workouts/demo-2" class="btn btn-outline btn-sm" data-action="view-details"
-                data-target-id="demo-2">Деталі</a>
-              <button type="button" class="btn btn-danger btn-sm" data-action="delete-workout" data-target-id="demo-2"
-                aria-label="Видалити тренування">Видалити</button>
-            </div>
+            <h3 class="workout-title">Вечірня поїздка</h3>
+            <p class="workout-metrics">
+              <span><strong>40</strong> хв</span>
+              <span class="metric-divider">·</span>
+              <span><strong>380</strong> ккал</span>
+            </p>
           </article>
         </div>
       </section>
     </div>
 
-    <aside class="app-aside" id="quick-stats" aria-labelledby="stats-heading">
-      <div class="stats-panel">
-        <h2 class="section-title" id="stats-heading">Підсумок і статистика</h2>
+    <aside class="quick-stats" id="quick-stats" aria-labelledby="stats-heading">
+      <h2 class="section-title" id="stats-heading">Статистика</h2>
 
-        <div class="stats-cards">
-          <div class="stat-card">
-            <span class="stat-caption">Всього занять</span>
-            <strong class="stat-figure" id="total-count" data-stat="count">2</strong>
-          </div>
-          <div class="stat-card">
-            <span class="stat-caption">Сумарний час</span>
-            <strong class="stat-figure" id="total-minutes" data-stat="minutes">75 хв</strong>
-          </div>
-          <div class="stat-card stat-card-highlight">
-            <span class="stat-caption">Спалено енергії</span>
-            <strong class="stat-figure" id="total-calories" data-stat="calories">790 ккал</strong>
-          </div>
+      <div class="stats-cards">
+        <div class="stat-card">
+          <span class="stat-caption">Всього занять</span>
+          <strong class="stat-figure">3</strong>
         </div>
-
-        <div class="goal-progress-box">
-          <div class="goal-header">
-            <span>Тижнева мета (3000 ккал)</span>
-            <span class="goal-percentage" id="goal-percent">26%</span>
-          </div>
-          <div class="progress-bar-container" role="progressbar" aria-valuenow="26" aria-valuemin="0"
-            aria-valuemax="100">
-            <div class="progress-bar-fill" id="goal-bar-fill" style="width: 26%;"></div>
-          </div>
+        <div class="stat-card">
+          <span class="stat-caption">Сумарний час</span>
+          <strong class="stat-figure">115 хв</strong>
+        </div>
+        <div class="stat-card stat-card-highlight">
+          <span class="stat-caption">Спалено енергії</span>
+          <strong class="stat-figure">1170 ккал</strong>
         </div>
       </div>
     </aside>
   </main>
 
-  <footer class="app-footer">
-    <div class="footer-container">
-      <p class="copyright">&copy; 2026 Workout Tracker · 2 курс, ФІОТ КПІ</p>
-      <p class="author-credits">Варіант №19 · Розроблено для спортивних тренувань</p>
-    </div>
+  <footer class="site-footer">
+    <p>Навчальний проєкт «Трекер тренувань», варіант №19</p>
   </footer>
-
-  <script src="js/app.js"></script>
 </body>
 
 </html>
