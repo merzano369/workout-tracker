@@ -1,4 +1,4 @@
-/* Практична робота №4. Варіант №19. Адаптивна верстка Grid/Flexbox. */
+/* Практична робота №5. Варіант №19. Колір, типографіка, композиція. */
 
 :root {
     --bg-dark: #000000;
@@ -12,11 +12,9 @@
     --primary-glow: rgba(255, 87, 34, 0.24);
     --text-primary: #ffffff;
     --text-secondary: #b0b0b0;
-    --text-muted: #757575;
+    --text-muted: #b0b0b0;
     --color-info: #03a9f4;
-    --font-family:
-        -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
-        Cantarell, "Open Sans", sans-serif;
+    --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", sans-serif;
     --radius-sm: 6px;
     --radius-md: 10px;
     --touch-target-min: 48px;
@@ -86,7 +84,7 @@ body {
 
 .site-title {
     color: var(--text-primary);
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: 800;
 }
 
@@ -135,7 +133,7 @@ body {
 .section-title {
     margin-bottom: 14px;
     color: var(--text-primary);
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     font-weight: 700;
 }
 
@@ -295,7 +293,7 @@ body {
 }
 
 .metric-divider {
-    color: var(--border-subtle);
+    color: var(--text-secondary);
 }
 
 /* Aside зі статистикою */
@@ -337,8 +335,96 @@ body {
     padding: 4px 0;
     color: var(--primary-orange);
     font-size: 1.8rem;
-    font-weight: 700;
+    font-weight: 800;
     line-height: 1.2;
+}
+
+/* Нечітку вимогу мотивації я пов'язав із видимим наближенням до мети.
+   Помаранчевий акцент спрямовує увагу на прогрес і головну дію.
+   Великі жирні числа допомагають швидко оцінити власні результати.
+   Темні нейтральні поверхні залишають другорядні блоки спокійними. */
+.weekly-progress {
+    padding: 16px;
+    margin-bottom: 20px;
+    border: 1px solid var(--primary-orange);
+    border-radius: var(--radius-md);
+    background: var(--surface-muted);
+}
+
+.progress-label {
+    font-weight: 700;
+}
+
+.progress-summary {
+    margin: 8px 0 12px;
+}
+
+.progress-summary strong {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--primary-orange);
+}
+
+.progress-note {
+    margin-top: 8px;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+progress {
+    width: 100%;
+    height: 16px;
+    display: block;
+    appearance: none;
+    border: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #242424;
+}
+
+progress::-webkit-progress-bar {
+    background: #242424;
+    border-radius: 8px;
+}
+
+progress::-webkit-progress-value {
+    background: #ff5722;
+    border-radius: 8px;
+}
+
+progress::-moz-progress-bar {
+    background: #ff5722;
+    border-radius: 8px;
+}
+
+.workout-card[data-type="Біг"] {
+    border-left-color: #03a9f4;
+}
+
+.workout-card[data-type="Силове тренування"] {
+    border-left-color: #ff5722;
+}
+
+.workout-card[data-type="Велосипед"] {
+    border-left-color: #8bc34a;
+}
+
+.workout-card[data-type="Плавання"] {
+    border-left-color: #80cbc4;
+}
+
+.workout-card[data-type="HIIT / Кардіо"] {
+    border-left-color: #ce93d8;
+}
+
+.workout-metrics strong {
+    font-size: 1.25rem;
+    font-weight: 800;
+}
+
+:focus-visible {
+    outline: 2px solid var(--primary-orange);
+    outline-offset: 3px;
 }
 
 /* Footer */
