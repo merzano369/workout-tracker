@@ -101,8 +101,10 @@ form.addEventListener('submit', event => {
   event.preventDefault();
   validateCalories();
   if (!form.reportValidity()) return;
-  workouts.push({ type: typeInput.value,
-    minutes: Number(minutesInput.value), calories: Number(caloriesInput.value) });
+  workouts.push({
+    type: typeInput.value,
+    minutes: Number(minutesInput.value), calories: Number(caloriesInput.value)
+  });
   renderWorkouts(workouts);
   form.reset();
   caloriesInput.setCustomValidity('');
