@@ -1,114 +1,158 @@
 <!DOCTYPE html>
 <html lang="uk">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Трекер тренувань</title>
   <link rel="stylesheet" href="css/style.css">
+  <script src="script.js" defer></script>
 </head>
-<body>
 
-  <!-- Шапка з назвою застосунку та навігацією -->
-  <header>
-    <h1>Трекер тренувань</h1>
-    <nav aria-label="Основна навігація">
-      <ul>
-        <li><a href="#add-workout">Додати тренування</a></li>
-        <li><a href="#workout-history">Історія тренувань</a></li>
-        <li><a href="#workout-stats">Статистика</a></li>
-      </ul>
-    </nav>
+<body>
+  <header class="site-header">
+    <div class="header-container">
+      <h1 class="site-title">Трекер тренувань</h1>
+
+      <nav class="site-nav" aria-label="Головне меню">
+        <ul class="nav-list">
+          <li class="nav-item"><a class="nav-link active" href="#add-workout">Додати</a></li>
+          <li class="nav-item"><a class="nav-link" href="#quick-stats">Статистика</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
-  <!-- Основний контент сторінки -->
-  <main>
-    <!-- Секція форми додавання тренування -->
-    <section id="add-workout" aria-labelledby="heading-add-workout">
-      <h2 id="heading-add-workout">Додати тренування</h2>
-      <form action="#" method="post">
-        <div>
-          <label for="workout-date">Дата тренування:</label>
-          <input type="date" id="workout-date" name="date" required>
+  <main class="site-main">
+    <div class="content-container">
+      <section id="add-workout" aria-labelledby="form-heading">
+        <div class="section-card">
+          <h2 class="section-title" id="form-heading">Додати тренування</h2>
+
+          <form class="workout-form" id="workout-form">
+            <div class="form-group">
+              <label class="form-label" for="workout-type">Тип тренування</label>
+              <select class="form-select" id="workout-type" name="type" required>
+                <option value="" selected disabled>Оберіть активність</option>
+                <option value="Біг">Біг</option>
+                <option value="Силове тренування">Силове тренування</option>
+                <option value="Велосипед">Велосипед</option>
+                <option value="Плавання">Плавання</option>
+                <option value="HIIT / Кардіо">HIIT / Кардіо</option>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="workout-minutes">Тривалість (хв)</label>
+                <input class="form-input" id="workout-minutes" name="minutes" type="number" min="1"
+                  placeholder="Наприклад, 45" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="workout-calories">Калорії (ккал)</label>
+                <input class="form-input" id="workout-calories" name="calories" type="number" min="1" max="2000"
+                  placeholder="Наприклад, 380" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="workout-date">Дата тренування</label>
+              <input class="form-input" id="workout-date" name="date" type="date">
+            </div>
+
+            <p id="calories-error" role="status"></p>
+            <p>Інтенсивність: <output id="workout-intensity" for="workout-minutes workout-calories" aria-live="polite">Введіть тривалість і калорії</output></p>
+            <button class="btn btn-primary" type="submit">Зберегти тренування</button>
+          </form>
         </div>
+      </section>
 
-        <div>
-          <label for="workout-type">Тип активності:</label>
-          <select id="workout-type" name="type" required>
-            <option value="" disabled selected>Оберіть тип активності</option>
-            <option value="strength">Силове тренування</option>
-            <option value="cardio">Кардіотренування / Біг</option>
-            <option value="stretching">Розтяжка / Йога</option>
-            <option value="cycling">Велотренування</option>
-            <option value="swimming">Плавання</option>
-          </select>
+      <section id="workouts-history" aria-labelledby="history-heading">
+        <h2 class="section-title" id="history-heading">Історія тренувань</h2>
+
+        <div class="workouts-grid" id="workouts-list">
+          <article class="workout-card short" data-type="Біг">
+            <div class="card-header">
+              <span class="workout-badge">
+                <span class="workout-icon" aria-hidden="true">Б</span>
+                Біг
+              </span>
+              <time class="workout-date" datetime="2026-09-22">22.09.2026</time>
+            </div>
+            <h3 class="workout-title">Ранкова пробіжка</h3>
+            <p class="workout-metrics">
+              <span><strong>25</strong> хв</span>
+              <span class="metric-divider">·</span>
+              <span><strong>240</strong> ккал</span>
+            </p>
+          </article>
+
+          <article class="workout-card long" data-type="Силове тренування">
+            <div class="card-header">
+              <span class="workout-badge">
+                <span class="workout-icon" aria-hidden="true">С</span>
+                Силове тренування
+              </span>
+              <time class="workout-date" datetime="2026-09-20">20.09.2026</time>
+            </div>
+            <h3 class="workout-title">День ніг і кор</h3>
+            <p class="workout-metrics">
+              <span><strong>50</strong> хв</span>
+              <span class="metric-divider">·</span>
+              <span><strong>550</strong> ккал</span>
+            </p>
+          </article>
+
+          <article class="workout-card long" data-type="Велосипед">
+            <div class="card-header">
+              <span class="workout-badge">
+                <span class="workout-icon" aria-hidden="true">В</span>
+                Велосипед
+              </span>
+              <time class="workout-date" datetime="2026-09-18">18.09.2026</time>
+            </div>
+            <h3 class="workout-title">Вечірня поїздка</h3>
+            <p class="workout-metrics">
+              <span><strong>40</strong> хв</span>
+              <span class="metric-divider">·</span>
+              <span><strong>380</strong> ккал</span>
+            </p>
+          </article>
         </div>
+      </section>
+    </div>
 
-        <div>
-          <label for="workout-duration">Тривалість (хв):</label>
-          <input type="number" id="workout-duration" name="duration" min="1" max="600" placeholder="Наприклад, 45" required>
+    <aside class="quick-stats" id="quick-stats" aria-labelledby="stats-heading">
+      <h2 class="section-title" id="stats-heading">Статистика</h2>
+
+      <div class="weekly-progress">
+        <label class="progress-label" for="weekly-progress">Мета тижня</label>
+        <p class="progress-summary"><strong id="completed-count">3</strong> із <strong>5</strong> занять</p>
+        <progress id="weekly-progress" max="5" value="3">60%</progress>
+        <p class="progress-note" id="progress-note">Ще 2 заняття до мети</p>
+      </div>
+
+      <div class="stats-cards">
+        <div class="stat-card">
+          <span class="stat-caption">Всього занять</span>
+          <strong class="stat-figure">3</strong>
         </div>
-
-        <div>
-          <label for="workout-calories">Спалені калорії (ккал):</label>
-          <input type="number" id="workout-calories" name="calories" min="0" max="5000" placeholder="Наприклад, 320">
+        <div class="stat-card">
+          <span class="stat-caption">Сумарний час</span>
+          <strong class="stat-figure">115 хв</strong>
         </div>
-
-        <div>
-          <label for="workout-notes">Нотатки до тренування:</label>
-          <textarea id="workout-notes" name="notes" rows="3" placeholder="Самопочуття, робочі ваги, дистанція..."></textarea>
+        <div class="stat-card stat-card-highlight">
+          <span class="stat-caption">Спалено енергії</span>
+          <p class="stat-figure" id="total-calories">1170 ккал</p>
         </div>
-
-        <div>
-          <button type="submit">Зберегти тренування</button>
-        </div>
-      </form>
-    </section>
-
-    <!-- Секція історії тренувань із повторюваними картками (article) -->
-    <section id="workout-history" aria-labelledby="heading-history">
-      <h2 id="heading-history">Історія тренувань</h2>
-
-      <!-- Картка тренування 1 -->
-      <article class="workout-card">
-        <h3>2026-09-17 - Силове тренування</h3>
-        <p><strong>Тривалість:</strong> 60 хв</p>
-        <p><strong>Спалені калорії:</strong> 420 ккал</p>
-        <p><strong>Нотатки:</strong> Присідання зі штангою 4х8, жим лежачи 4х10. Відмінний темп.</p>
-      </article>
-
-      <!-- Картка тренування 2 -->
-      <article class="workout-card">
-        <h3>2026-09-15 - Кардіотренування / Біг</h3>
-        <p><strong>Тривалість:</strong> 35 хв</p>
-        <p><strong>Спалені калорії:</strong> 310 ккал</p>
-        <p><strong>Нотатки:</strong> Легкий крос на стадіоні, середня швидкість 10 км/год.</p>
-      </article>
-
-      <!-- Картка тренування 3 -->
-      <article class="workout-card">
-        <h3>2026-09-13 - Розтяжка / Йога</h3>
-        <p><strong>Тривалість:</strong> 25 хв</p>
-        <p><strong>Спалені калорії:</strong> 120 ккал</p>
-        <p><strong>Нотатки:</strong> Комплекс на гнучкість суглобів і відновлення попереку.</p>
-      </article>
-    </section>
+      </div>
+    </aside>
   </main>
 
-  <!-- Блок статистики (винесено в aside за варіантом 19) -->
-  <aside id="workout-stats" aria-labelledby="heading-stats">
-    <h2 id="heading-stats">Статистика активності</h2>
-    <div class="stats-summary">
-      <p><strong>Загальна кількість занять:</strong> 3</p>
-      <p><strong>Сумарний час тренувань:</strong> 120 хв (2 год)</p>
-      <p><strong>Сумарно спалено:</strong> 850 ккал</p>
-    </div>
-  </aside>
-
-  <!-- Підвал сторінки -->
-  <footer>
-    <p>Навчальний проєкт «Трекер тренувань» &copy; 2026. Автор: Махмудов І. А., група ІП-54.</p>
+  <footer class="site-footer">
+    <p>Навчальний проєкт «Трекер тренувань», варіант №19</p>
   </footer>
-
-  <script src="js/app.js"></script>
 </body>
+
 </html>

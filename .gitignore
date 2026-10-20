@@ -16,3 +16,5 @@ Desktop.ini
 # Логи та тимчасові файли
 *.log
 npm-debug.log*
+
+.gitignore
