@@ -29,7 +29,7 @@
         <div class="section-card">
           <h2 class="section-title" id="form-heading">Додати тренування</h2>
 
-          <form class="workout-form">
+          <form class="workout-form" id="workout-form">
             <div class="form-group">
               <label class="form-label" for="workout-type">Тип тренування</label>
               <select class="form-select" id="workout-type" name="type" required>
@@ -58,9 +58,12 @@
 
             <div class="form-group">
               <label class="form-label" for="workout-date">Дата тренування</label>
-              <input class="form-input" id="workout-date" name="date" type="date" required>
+              <input class="form-input" id="workout-date" name="date" type="date">
             </div>
 
+            <p id="calories-error" role="status"></p>
+            <p>Інтенсивність: <output id="workout-intensity" for="workout-minutes workout-calories"
+                aria-live="polite">Введіть тривалість і калорії</output></p>
             <button class="btn btn-primary" type="submit">Зберегти тренування</button>
           </form>
         </div>
@@ -119,6 +122,15 @@
           </article>
         </div>
       </section>
+    <section id="api-history" class="section-card" aria-labelledby="api-heading">
+      <h2 class="section-title" id="api-heading">Журнал вправ із API</h2>
+      <p>Навчальні дані JSONPlaceholder: назви завдань трактуються як вправи.</p>
+      <button class="btn btn-primary" id="refresh-workouts" type="button">Оновити</button>
+      <p id="api-loading" role="status" hidden>Завантаження…</p>
+      <p id="api-error" role="alert" hidden></p>
+      <p id="api-summary" aria-live="polite"></p>
+      <div class="workouts-grid" id="api-workouts-list" aria-busy="false"></div>
+    </section>
     </div>
 
     <aside class="quick-stats" id="quick-stats" aria-labelledby="stats-heading">

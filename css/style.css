@@ -1,4 +1,10 @@
-/* Практична робота №5. Варіант №19. Колір, типографіка, композиція. */
+/* Трекер тренувань, варіант №19. */
+
+#api-history { scroll-margin-top: 20px; }
+#api-history > p { margin: 12px 0; }
+#api-history .workout-title { overflow-wrap: anywhere; }
+#api-error { color: #ffab91; }
+#refresh-workouts:disabled { opacity: 0.6; cursor: wait; }
 
 :root {
     --bg-dark: #000000;
