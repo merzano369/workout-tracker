@@ -66,6 +66,7 @@ function renderWorkouts(items, container = listContainer, fromApi = false) {
 
 renderWorkouts(workouts);
 
+<<<<<<< HEAD
 const API_URL = 'https://jsonplaceholder.typicode.com/todos?userId=4';
 const apiList = document.querySelector('#api-workouts-list');
 const refreshButton = document.querySelector('#refresh-workouts');
@@ -119,6 +120,8 @@ async function loadWorkouts() {
 refreshButton.addEventListener('click', loadWorkouts);
 loadWorkouts();
 
+=======
+>>>>>>> 0318a4cb051e87ce7570a079713f73de980fe87f
 const form = document.querySelector('#workout-form');
 const typeInput = document.querySelector('#workout-type');
 const minutesInput = document.querySelector('#workout-minutes');
