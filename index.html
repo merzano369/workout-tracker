@@ -80,11 +80,19 @@
     <section id="api-history" class="section-card" aria-labelledby="api-heading">
       <h2 class="section-title" id="api-heading">Журнал вправ із API</h2>
       <p>Навчальні дані JSONPlaceholder: назви завдань трактуються як вправи.</p>
+<<<<<<< HEAD
       <button class="btn btn-primary" id="refresh-workouts" @click="loadWorkouts" :disabled="loading" type="button">Оновити</button>
       <p id="api-loading" role="status" v-show="loading">Завантаження…</p>
       <p id="api-error" role="alert" v-show="apiError">{{ apiError }}</p>
       <p id="api-summary" aria-live="polite">{{ apiSummary }}</p>
       <div class="workouts-grid" id="api-workouts-list" :aria-busy="loading"><article class="workout-card" v-for="item in apiItems" :key="item.id"><h3 class="workout-title">{{ item.title }}</h3><p class="workout-metrics">{{ item.completed ? "Виконано" : "Не виконано" }}</p></article></div>
+=======
+      <button class="btn btn-primary" id="refresh-workouts" type="button">Оновити</button>
+      <p id="api-loading" role="status" hidden>Завантаження…</p>
+      <p id="api-error" role="alert" hidden></p>
+      <p id="api-summary" aria-live="polite"></p>
+      <div class="workouts-grid" id="api-workouts-list" aria-busy="false"></div>
+>>>>>>> be0801a3a60cbc7b662a95e23508c0b10e6a3a6e
     </section>
     </div>
 
