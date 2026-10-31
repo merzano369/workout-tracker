@@ -7,6 +7,7 @@
   <title>Трекер тренувань</title>
   <link rel="stylesheet" href="css/style.css">
   <script src="https://unpkg.com/vue@3.5.13/dist/vue.global.js" defer></script>
+  <script src="js/storage.js" defer></script>
   <script src="script.js" defer></script>
 </head>
 
@@ -30,6 +31,8 @@
         <div class="section-card">
           <h2 class="section-title" id="form-heading">Додати тренування</h2>
 
+          <p id="storage-status" role="status">{{ storageStatus }}</p>
+          <p id="storage-error" role="alert">{{ storageError }}</p>
           <form class="workout-form" id="workout-form" @submit.prevent="addWorkout">
             <div class="form-group">
               <label class="form-label" for="workout-type">Тип тренування</label>
@@ -65,7 +68,7 @@
             <p id="calories-error" role="status">{{ caloriesError }}</p>
             <p>Інтенсивність: <output id="workout-intensity" for="workout-minutes workout-calories"
                 aria-live="polite">{{ intensity }}</output></p>
-            <button class="btn btn-primary" type="submit">Зберегти тренування</button>
+            <button class="btn btn-primary" type="submit" :disabled="storageBusy || !storageReady">Зберегти тренування</button>
           </form>
         </div>
       </section>
@@ -74,7 +77,8 @@
         <h2 class="section-title" id="history-heading">Історія тренувань</h2>
 
         <div class="workouts-grid" id="workouts-list">
-          <workout-row v-for="workout in workouts" :key="workout.id" :type="workout.type" :minutes="workout.minutes" :calories="workout.calories" @increase="increaseMinutes(workout.id)"></workout-row>
+          <workout-row v-for="workout in workouts" :key="workout.id" :type="workout.type" :minutes="workout.duration" :calories="workout.calories" :date="workout.date" :busy="storageBusy || !storageReady" @increase="increaseMinutes(workout.id)" @remove="removeWorkout(workout.id)"></workout-row>
+          <p v-if="storageReady && !workouts.length">Журнал порожній. Додайте тренування.</p>
         </div>
       </section>
     <section id="api-history" class="section-card" aria-labelledby="api-heading">
@@ -90,12 +94,13 @@
 
     <aside class="quick-stats" id="quick-stats" aria-labelledby="stats-heading">
       <h2 class="section-title" id="stats-heading">Статистика</h2>
+      <p>Тривалість за поточний тиждень: <strong id="weekly-duration">{{ weeklyDuration }} хв</strong></p>
 
       <div class="weekly-progress">
         <label class="progress-label" for="weekly-progress">Мета тижня</label>
-        <p class="progress-summary"><strong id="completed-count">{{ workouts.length }}</strong> із <strong>5</strong> занять</p>
-        <progress id="weekly-progress" max="5" :value="Math.min(workouts.length,5)">{{ Math.min(workouts.length*20,100) }}%</progress>
-        <p class="progress-note" id="progress-note">{{ workouts.length < 5 ? `Ще ${5-workouts.length} заняття до мети` : "Мету виконано" }}</p>
+        <p class="progress-summary"><strong id="completed-count">{{ weeklyCount }}</strong> із <strong>5</strong> занять</p>
+        <progress id="weekly-progress" max="5" :value="Math.min(weeklyCount,5)">{{ Math.min(weeklyCount*20,100) }}%</progress>
+        <p class="progress-note" id="progress-note">{{ weeklyCount < 5 ? `До мети залишилося занять: ${5-weeklyCount}` : "Мету тижня виконано" }}</p>
       </div>
 
       <div class="stats-cards">
